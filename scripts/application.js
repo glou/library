@@ -13,7 +13,7 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.showInfo = function () {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${read}`;
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
 Object.defineProperty(Book.prototype, "showInfo", {enumerable:false});
@@ -24,25 +24,41 @@ function addToLibrary(title, author, pages, read) {
     myLibrary.push(newBook);
 }
 
+
+const bookCards = document.getElementsByClassName("books");
 //To display saved books
-function displayBooks() {
-    let newItem;
-    let infoNode;
+//Takes one argument, indicating to show all the library or to just update (skipping the loop)
+function displayBooks(update) {    
+    let bookCard;
     let bookInfo;
-    myLibrary.forEach(function (book) {
-        newItem = document.createElement("ul");        
-        for (prop in book) {
-            infoNode = document.createElement("li");
-            bookInfo = document.createTextNode(book[prop]);
-            infoNode.appendChild(bookInfo)
-            newItem.appendChild(infoNode);
-        }
-        document.body.appendChild(newItem);
-        document.body.append(document.createElement("br"));
-    })
+    if (!update){
+        myLibrary.forEach(function (book) {
+            bookCard = document.createElement("div");
+            bookCard.classList.add("book-card");
+            bookInfo = document.createTextNode(book.showInfo());
+            bookCard.appendChild(bookInfo);         
+            bookCards[0].appendChild(bookCard);
+        })
+    } else {
+        bookCard = document.createElement("div");
+        bookCard.classList.add("book-card");
+        bookInfo = document.createTextNode(myLibrary[myLibrary.length - 1].showInfo());
+        bookCard.appendChild(bookInfo);         
+        bookCards[0].appendChild(bookCard);
+    }    
 }
 
 
-addToLibrary("harry potter", "rowling", "500", "sim");
-addToLibrary("harry potter 2", "jk rowling", "421", "sim");
-addToLibrary("teste", "eu", "10", "não");
+document.getElementById("open-form").addEventListener("click", () => document.getElementById("add-book").style.display = "block");
+document.getElementById("book-form").onsubmit = (e) => {
+    e.preventDefault();
+    let fields = document.querySelectorAll("input");
+    addToLibrary(fields[0].value, fields[1].value, fields[2].value, fields[3].value); 
+    displayBooks(true);
+}
+document.getElementById("close-form").addEventListener("click", () => document.getElementById("add-book").style.display = "none");
+
+
+
+
+

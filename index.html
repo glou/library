@@ -2,11 +2,43 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
         <title>Small Library app</title>
         <link href="styles/main_styles.css" rel="stylesheet">
-        <script src="scripts/application.js" defer></script>
+        <script src="scripts/application.js" defer></script>        
     </head>
     <body>
+        <div class="main-container">
+            <div class="content">
+                <div class="left-side">
+                    <p>My Library</p>
+                    <button id="open-form">Add book</button>
+                    <div id="add-book">
+                        <form id="book-form">
+                        <label for="title"><p>Title</p></label>
+                        <input type="text" name="title" required>
+                        <label for="author"><p>Author</p></label>
+                        <input type="text" name="author" required>
+                        <label for="pages"><p>Pages</p></label>
+                        <input type="number" name="pages" min="1" required>
+                        <label for="finished"><p>Have you finished it?</p></label>
+                        <input type="text" name="finished" required>
+                        <div>
+                            <button type="submit" id="add-btn">Add</button>
+                            <button type="button" id="close-form">Close</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <p>Stored books</p>
+                    <div class="books"></div>
+                </div>           
+            </div>
+            <div class="footer">
+                <p>Made by <a href="https://github.com/glou">Gabriel</a>, 2021</p>
+            </div>            
+        </div>
         
     </body>
 </html>
