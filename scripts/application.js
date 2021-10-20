@@ -1,5 +1,7 @@
 //Main code for the app.
 
+//TODO: Steps 6 and 7 from TOP
+
 //All books will be stored, as objects, inside a single array
 let myLibrary = [];
 
@@ -20,7 +22,7 @@ function addToLibrary(title, author, pages, read) {
 }
 
 function removeFromLibrary(e) {
-    let bookIndex = +e.target.parentElement.dataset.index; //Data attribute created in following function
+    let bookIndex = +e.target.parentElement.dataset.index; //Data attribute created in the following function
     myLibrary.splice(bookIndex, 1);
     displayBooks(true);
 }
@@ -63,18 +65,32 @@ function displayBooks(allContent) {
     }    
 }
 
-//The two following handlers purpose is to create a 'show/hide' function
+//The two following handlers purpose is to create a show/hide function
 //for the formulary
-document.getElementById("open-form").addEventListener("click", () => document.getElementById("add-book").style.display = "block");
-document.getElementById("close-form").addEventListener("click", () => document.getElementById("add-book").style.display = "none");
+document.getElementById("open-form").addEventListener("click", () => 
+    document.getElementById("add-book").style.display = "block");
+document.getElementById("close-form").addEventListener("click", () => 
+    document.getElementById("add-book").style.display = "none");
 
 //'Add' button
-document.getElementById("book-form").onsubmit = (e) => {
-    e.preventDefault();
-    let fields = document.querySelectorAll("input");
-    addToLibrary(fields[0].value, fields[1].value, fields[2].value, fields[3].value); 
-    displayBooks(false);
-}
+document.getElementById("book-form").addEventListener("submit", (e) => {
+    e.preventDefault();    
+    if (myLibrary.find(({title}) => title === "\"" + document.getElementById("title").value + "\"")) {
+        alert("There is already a book with this title in the library!");
+        return;
+    }
+    const data = new FormData(document.getElementById("book-form"));    
+    let fields = [];    
+    for (const entry of data.values()) {
+        fields.push(entry);
+    }    
+    addToLibrary(fields[0], fields[1], fields[2], fields[3]); 
+    displayBooks(false); 
+    //Clear all text fields after pressing to add
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+})
 
 //'Remove' button
 bookCards[0].addEventListener("click", (e) => {

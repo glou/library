@@ -15,19 +15,22 @@
                     <button id="open-form">Add book</button>
                     <div id="add-book">
                         <form id="book-form">
-                        <label for="title"><p>Title</p></label>
-                        <input type="text" name="title" required>
-                        <label for="author"><p>Author</p></label>
-                        <input type="text" name="author" required>
-                        <label for="pages"><p>Pages</p></label>
-                        <input type="number" name="pages" min="1" required>
-                        <label for="finished"><p>Have you finished it?</p></label>
-                        <input type="text" name="finished" required>
-                        <div>
-                            <button type="submit" id="add-btn">Add</button>
-                            <button type="button" id="close-form">Close</button>
-                        </div>
-                    </form>
+                            <label for="title"><p>Title</p></label>
+                            <input type="text" name="title" id="title" maxlength="60" required>
+                            <label for="author"><p>Author</p></label>
+                            <input type="text" name="author" id="author" maxlength="50" required>
+                            <label for="pages"><p>Pages</p></label>
+                            <input type="number" name="pages" id="pages" min="1" max="9999" required>
+                            <p>Have you finished it?</p>
+                            <input type="radio" name="finished" id="yes" value="Read" checked>
+                            <label for="yes">Yes</label>
+                            <input type="radio" name="finished" id="no" value="Not read">
+                            <label for="no">No</label>                        
+                            <div>
+                                <button type="submit" id="add-btn">Add</button>
+                                <button type="button" id="close-form">Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="right-side">
