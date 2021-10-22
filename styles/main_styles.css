@@ -98,7 +98,14 @@
 }
 
 .book-card {
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid black;    
+}
+
+.book-info {
+    color: blue;
 }
 
 ul {
